@@ -1,13 +1,13 @@
-package piledesctop.cluster
+package piledesktop.cluster
 {
 	import flash.filesystem.File;
 	import flash.geom.Point;
 	
 	import mx.core.UIComponent;
 	
-	import piledesctop.Util;
-	import piledesctop.paper.Mail;
-	import piledesctop.paper.Paper;
+	import piledesktop.Util;
+	import piledesktop.paper.Mail;
+	import piledesktop.paper.Paper;
 	
 	public class MailCluster extends Cluster
 	{

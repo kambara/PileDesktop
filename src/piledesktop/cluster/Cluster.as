@@ -1,4 +1,4 @@
-package piledesctop.cluster
+package piledesktop.cluster
 {
 	import caurina.transitions.Tweener;
 	
@@ -12,8 +12,8 @@ package piledesctop.cluster
 	
 	import mx.core.UIComponent;
 	
-	import piledesctop.*;
-	import piledesctop.paper.*;
+	import piledesktop.*;
+	import piledesktop.paper.*;
 
 	public class Cluster extends EventDispatcher 
 	{

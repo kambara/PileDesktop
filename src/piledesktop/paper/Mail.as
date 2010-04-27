@@ -1,4 +1,4 @@
-package piledesctop.paper
+package piledesktop.paper
 {
 	import flash.display.Bitmap;
 	import flash.display.Loader;
@@ -8,7 +8,7 @@ package piledesctop.paper
 	import flash.geom.Point;
 	import flash.net.URLRequest;
 	
-	import piledesctop.*;
+	import piledesktop.*;
 	
 	public class Mail extends Paper
 	{

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml"
 						layout="absolute"
-						applicationComplete="init();"  height="600" width="800" frameRate="60" xmlns:ns1="*" borderStyle="none" xmlns:ns2="piledesctop.*" displayStateChange="onWindowStateChange()">
+						applicationComplete="init();"  height="600" width="800" frameRate="60" xmlns:ns1="*" borderStyle="none" xmlns:ns2="piledesktop.*" displayStateChange="onWindowStateChange()">
 	<mx:Style>
 		WindowedApplication
    		{
@@ -12,11 +12,11 @@
 	</mx:Style>
 	<mx:Script>
 		<![CDATA[
-			import piledesctop.paper.SubDirEvent;
+			import piledesktop.paper.SubDirEvent;
 			import mx.effects.easing.Bounce;
 			import mx.formatters.DateFormatter;
 			import mx.core.UIComponent;
-			import piledesctop.*;
+			import piledesktop.*;
 			import caurina.transitions.Tweener;
 			
 			private var currentDir:File;

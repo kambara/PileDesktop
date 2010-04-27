@@ -1,12 +1,12 @@
-package piledesctop.cluster
+package piledesktop.cluster
 {
 	import flash.filesystem.File;
 	import flash.geom.Point;
 	
 	import mx.core.UIComponent;
 	
-	import piledesctop.*;
-	import piledesctop.paper.*;
+	import piledesktop.*;
+	import piledesktop.paper.*;
 	
 	public class SubDirCluster extends Cluster
 	{

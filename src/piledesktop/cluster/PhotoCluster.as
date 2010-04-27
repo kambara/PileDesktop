@@ -1,4 +1,4 @@
-package piledesctop.cluster
+package piledesktop.cluster
 {
 	import flash.events.Event;
 	import flash.filesystem.File;
@@ -6,8 +6,8 @@ package piledesctop.cluster
 	
 	import mx.core.UIComponent;
 	
-	import piledesctop.*;
-	import piledesctop.paper.*;
+	import piledesktop.*;
+	import piledesktop.paper.*;
 	
 	public class PhotoCluster extends Cluster
 	{

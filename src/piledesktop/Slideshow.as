@@ -1,4 +1,4 @@
-package piledesctop
+package piledesktop
 {
 	import caurina.transitions.Tweener;
 	
@@ -14,7 +14,7 @@ package piledesctop
 	import mx.core.UIComponent;
 	import mx.managers.CursorManager;
 	
-	import piledesctop.paper.Photo;
+	import piledesktop.paper.Photo;
 	
 	public class Slideshow extends UIComponent
 	{

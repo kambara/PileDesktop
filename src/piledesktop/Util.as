@@ -1,4 +1,4 @@
-package piledesctop
+package piledesktop
 {
 	import flash.geom.Point;
 	

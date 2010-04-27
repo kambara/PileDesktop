@@ -1,4 +1,4 @@
-package piledesctop
+package piledesktop
 {
 	
 	import flash.display.NativeWindow;
@@ -7,8 +7,8 @@ package piledesctop
 	
 	import mx.core.UIComponent;
 	
-	import piledesctop.cluster.*;
-	import piledesctop.paper.SubDirEvent;
+	import piledesktop.cluster.*;
+	import piledesktop.paper.SubDirEvent;
 
 	public class Desktop extends UIComponent
 	{

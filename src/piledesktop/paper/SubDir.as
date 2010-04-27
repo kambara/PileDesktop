@@ -1,4 +1,4 @@
-package piledesctop.paper
+package piledesktop.paper
 {
 	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
@@ -11,7 +11,7 @@ package piledesctop.paper
 	import flash.net.URLRequest;
 	import flash.utils.setTimeout;
 	
-	import piledesctop.*;
+	import piledesktop.*;
 	
 	public class SubDir extends Paper
 	{

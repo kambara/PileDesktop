@@ -1,4 +1,4 @@
-package piledesctop.paper
+package piledesktop.paper
 {
 	import caurina.transitions.Tweener;
 	
@@ -8,7 +8,7 @@ package piledesctop.paper
 	import flash.filesystem.File;
 	import flash.filters.DropShadowFilter;
 	import flash.geom.Point;
-	import piledesctop.*;
+	import piledesktop.*;
 
 	public class Paper extends Sprite
 	{

@@ -1,7 +1,8 @@
-package piledesctop
+package piledesktop
 {
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
+	import flash.events.SecurityErrorEvent;
 	import flash.net.Socket;
 	
 	public class Server
@@ -22,6 +23,9 @@ package piledesctop
 			});
 			socket.addEventListener(IOErrorEvent.IO_ERROR, function(event:IOErrorEvent):void {
 				trace("ioErrorHandler: "+event.text);
+			});
+			socket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, function(event:SecurityErrorEvent):void {
+				trace("securityError: " + event.text);
 			});
 			
 			try {

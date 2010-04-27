@@ -1,4 +1,4 @@
-package piledesctop.paper
+package piledesktop.paper
 {
 	import flash.events.MouseEvent;
 	import flash.filesystem.File;
@@ -6,7 +6,7 @@ package piledesctop.paper
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
 	
-	import piledesctop.*;
+	import piledesktop.*;
 
 	public class Memo extends Paper
 	{

@@ -1,4 +1,4 @@
-package piledesctop.paper
+package piledesktop.paper
 {
 	import caurina.transitions.Tweener;
 	
@@ -7,7 +7,7 @@ package piledesctop.paper
 	import flash.filesystem.File;
 	import flash.geom.Point;
 	
-	import piledesctop.*;
+	import piledesktop.*;
 
 	public class Photo extends Paper
 	{
@@ -45,8 +45,6 @@ package piledesctop.paper
 		}
 		
 		override protected function doubleClickHandler(event:MouseEvent):void {
-			trace("---");
-			trace(Config.xml.photo.@open_cmd);
 			if (Config.xml.photo
 				&& Config.xml.photo.@open_cmd
 				&& Config.xml.photo.@open_cmd.toString().length > 0) {
