@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="188" height="194" creationComplete="init()">
+	<mx:Script>
+		<![CDATA[
+			private function init():void {
+				this.calendar.dayNames = ["日", "月", "火", "水", "木", "金", "土"];
+			}
+			private function onChange():void {
+				this.dispatchEvent(new Event("change"));
+			}
+			public function get selectedDate():Date {
+				return this.calendar.selectedDate;
+			}
+			public function setFirstDayOfWeek(n:int):void {
+				this.calendar.firstDayOfWeek = n;
+			}
+		]]>
+	</mx:Script>
+	<mx:DateChooser change="onChange()" id="calendar" showToday="true" bottom="0" left="0"/>
+</mx:Canvas>

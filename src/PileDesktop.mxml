@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml"
+						layout="absolute"
+						applicationComplete="init();"  height="600" width="800" frameRate="60" xmlns:ns1="*" borderStyle="none" xmlns:ns2="piledesctop.*" displayStateChange="onWindowStateChange()">
+	<mx:Style>
+		WindowedApplication
+   		{
+   			background-color:"";
+   			background-image:"";
+   			padding: 0px;
+   		}
+	</mx:Style>
+	<mx:Script>
+		<![CDATA[
+			import piledesctop.paper.SubDirEvent;
+			import mx.effects.easing.Bounce;
+			import mx.formatters.DateFormatter;
+			import mx.core.UIComponent;
+			import piledesctop.*;
+			import caurina.transitions.Tweener;
+			
+			private var currentDir:File;
+			private var rank:int = 0;
+			private var rootContainer:UIComponent;
+			
+			private function init():void {
+				this.title = "PileDesktop";
+				
+				// config
+				try {
+					Config.load("config.xml");
+				} catch (error:Error) {
+					var msg:String = error.message;
+					status = msg;
+					return;
+				}
+
+				// window size
+				this.nativeWindow.width = parseInt(Config.xml.window.@width) || 800;
+				this.nativeWindow.height = parseInt(Config.xml.window.@height) || 600;
+				this.callLater(function():void {
+					nativeWindow.maximize();
+				});
+				
+				// container
+				rootContainer = new UIComponent();
+				this.addChildAt(rootContainer, 0);
+
+				// calendar
+				if (isSmartCalendarMode()) {
+					navBar.addEventListener("change", onCalendarChanged);
+					navBar.setFirstDayOfWeek(parseInt(Config.xml.calendar.@first_day_of_week));
+					onCalendarMouseOut();
+					changeDate(new Date());
+				} else {
+					this.navBar.visible = false;
+					currentDir = new File(Config.xml.home.@path);
+					changeDesktop();
+				}
+			}
+			
+			private function isSmartCalendarMode():Boolean {
+				return (Config.xml.home.@type
+						&& String(Config.xml.home.@type).toLowerCase() == "smartcalendar");
+			}
+			
+			// カレンダーからデスクトップ切り替え
+			private function onCalendarChanged(e:Event):void {
+				changeDate(e.target.selectedDate);
+			}
+			private function changeDate(date:Date):void {
+				// 日付 -> ディレクトリ
+				var dir:File = (new File(Config.xml.home.@path)).resolvePath(dateToDirPath(date));
+				if (currentDir && currentDir.nativePath == dir.nativePath) return;
+				rank = 0;
+				currentDir = dir;
+				changeDesktop();
+			}
+			private function dateToDirPath(date:Date):String {
+				// YYYY/YYYYMM/YYYY_MMDD
+				function formatDate(format:String, date:Date):String {
+					var formatter:DateFormatter = new DateFormatter();
+					formatter.formatString = format;
+					return formatter.format(date);
+				}
+				var d:String = formatDate("YYYY_MMDD", date);
+				var m:String = formatDate("YYYYMM", date);
+				var y:String = formatDate("YYYY", date);
+				var path:String = y + "/" + m + "/" + d;
+				return path;
+			}
+			
+			// デスクトップの更新
+			private var prevDesktop:Desktop;
+			private function changeDesktop():void {
+				if (prevDesktop) {
+					// フェードアウト
+					Tweener.addTween(prevDesktop, {
+						time: 0.8,
+						alpha: 0,
+						onComplete: function():void {
+							try {
+								rootContainer.removeChild(prevDesktop);
+							} catch (error:Error) {
+								trace("changeDesktop(): " + error.message);
+							} finally {
+								appendCurrentDirDesktop();
+							}
+						}
+					});
+				} else {
+					appendCurrentDirDesktop();
+				}
+			}
+			private function appendCurrentDirDesktop():void {
+				try {
+					var desktop:Desktop = new Desktop(currentDir);
+					desktop.addEventListener(SubDirEvent.OPEN_SUBDIR, openSubDirHandler);
+					rootContainer.addChild(desktop);
+					prevDesktop = desktop;
+					status = currentDir.nativePath;
+				} catch(error:Error) {
+					prevDesktop = null;
+					trace(error.message);
+					status = error.message; // no such dir
+				} finally {
+					if (isSmartCalendarMode()) {
+						parentDirButton.visible = (rank > 0);
+					} else {
+						parentDirButton.visible = (currentDir.parent && currentDir.parent.isDirectory);
+					}
+				}
+			}
+			
+			// 子ディレクトリへ
+			private function openSubDirHandler(event:SubDirEvent):void {
+				if (!event.dir) return;
+				if (!event.dir.isDirectory) return;
+				
+				rank += 1;
+				currentDir = event.dir;
+				changeDesktop();
+			}
+			
+			// 親ディレクトリへ
+			private function parentDirButtonClickHandler():void {
+				if (!currentDir.parent) return;
+				if (!currentDir.parent.isDirectory) return;
+				
+				rank -= 1;
+				currentDir = currentDir.parent;
+				changeDesktop();
+			}
+			
+			// タイトルバーの表示・非表示など
+			private function onWindowStateChange():void {
+				if (this.nativeWindow.displayState == NativeWindowDisplayState.MAXIMIZED) {
+					this.showStatusBar = false;
+					this.showTitleBar = false;
+					this.titleBarButtons.visible = true;
+				} else if (this.nativeWindow.displayState == NativeWindowDisplayState.NORMAL) {
+					this.showStatusBar = true;
+					this.showTitleBar = true;
+					this.titleBarButtons.visible = false;
+				}
+			}
+			
+			private function onCalendarMouseOver():void {
+				this.setChildIndex(navBar, this.numChildren-1);
+			}
+			private function onCalendarMouseOut():void {
+				this.setChildIndex(navBar, 0);
+			}
+		]]>
+	</mx:Script>
+	<ns1:NavigationBar id="navBar" left="10" bottom="10" mouseOver="onCalendarMouseOver()" mouseOut="onCalendarMouseOut()">
+	</ns1:NavigationBar>
+	<ns1:TitleBarButtons right="8" top="0" id="titleBarButtons">
+	</ns1:TitleBarButtons>
+	<mx:Button x="10" y="10" icon="@Embed(source='embed/24-em-up.png')" id="parentDirButton" width="40" height="40" fillAlphas="[0.8, 0.8, 1.0, 1.0]" click="parentDirButtonClickHandler()"/>
+</mx:WindowedApplication>

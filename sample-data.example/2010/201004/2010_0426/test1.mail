@@ -1,0 +1,7 @@
+* PulseAudioを試す
+http://fun.poosan.net/sawa/index.php?UID=1209314329
+https://wiki.ubuntu.com/PulseAudio
+インストール
+- libasound2-plugins (PulseAudioをサポートしていないアプリでも音を出すように？)
+- padevchooser
+- libflashsupport (flashでPulseAudio経由で音を鳴らす)

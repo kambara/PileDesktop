@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="60" height="26" backgroundColor="#FFFFFF" backgroundAlpha="0.9" borderStyle="solid" borderColor="#FFFFFF">
+	<mx:Script>
+		<![CDATA[
+			private function closeButtonClickHandler():void {
+				this.stage.nativeWindow.close();
+			}
+			private function normalSizeButtonClickHandler():void {
+				this.stage.nativeWindow.restore();
+			}
+		]]>
+	</mx:Script>
+	<mx:Button x="33" y="6" skin="@Embed(source='embed/cross.png')" click="closeButtonClickHandler()"/>
+	<mx:Button x="9" y="6" skin="@Embed(source='embed/application.png')" click="normalSizeButtonClickHandler()"/>
+	
+</mx:Canvas>

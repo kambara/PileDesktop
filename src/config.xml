@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<config>
+
+  <!--
+    home:
+    - path: PileDesktop起動時に表示するディレクトリを指定します。
+            type="SmartCalendar" のときはSmartCalendarのルートディレクトリを指定します。
+    - type: "SmartCalendar" にするとカレンダーが表示され、起動時にSmartCalendarの今日のディレクトリが表示されます。
+    -->
+
+  <home path="C:\Documents and Settings\kambara\My Documents\Flex Builder 3\PileDesktop\sample-data"
+        type="SmartCalendar" />
+
+  <window width="640"
+          height="480"
+          background="" />
+
+  <!--
+    calendar:
+    - first_day_of_week: 週の開始曜日。 0(日) 1(月) .. 6(土)
+    -->
+
+  <calendar first_day_of_week="1" />
+
+  <!--
+    max_on_desk: 写真やメモをそれぞれ最大何枚まで画面に表示するか
+    -->
+
+  <max_on_desk>20</max_on_desk>
+
+  <!--
+    photo:
+    - open_cmd: ダブルクリックしたときに画像を開くアプリケーションを指定します。
+                （例：open_cmd="C:\Program Files\Internet Explorer\iexplore.exe"）
+                未指定（open_cmd=""）の時は画像は拡大表示されます。
+                
+    -->
+
+  <photo width="360"
+         height="360"
+         open_cmd="" />
+
+  <!--
+    memo:
+    - charset: 文字コードを指定します。
+               utf-8, shift_jis, euc-jp, iso-2022-jp, .. など
+               http://livedocs.adobe.com/flex/2/langref/charset-codes.html
+               指定がないときはシステム標準(Windowsならshift_jis)が使われます
+               AIR beta2の段階ではeuc-jpはまだ使えないようです
+    -->
+
+  <memo width="250"
+        height="350"
+        font_size="16"
+        charset="utf-8">
+    <ext>
+      txt
+      log
+      ini
+      xml
+      html
+    </ext>
+  </memo>
+
+  <mail width="350"
+        height="250"
+        ext="mail"
+        open_cmd="C:\WINDOWS\system32\notepad.exe"
+        reply_cmd="C:\WINDOWS\system32\notepad.exe" />
+
+  <!--
+    server:
+    - host: PileDesktopServerが動いているホストをIPかホスト名で指定します。
+            localhost, 192.168.0.1 など
+            何も指定しないとlocalhostになります。
+    -->
+
+  <server host="localhost" port="10001" />
+
+</config>
